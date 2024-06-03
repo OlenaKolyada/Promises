@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Promises Demo</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <div id="container">
+        <header>
+            <div id="logo"><img src="funkycorgi.png" title="Funky Corgi" alt="Funky Corgi Logo" /></div>
+            <div id="download"><a href="promises.zip">Download Archive With Code</a></div>
+        </header>
+
+        <main>
+            <div id="div__promise" class="main__grid"></div>
+            <div id="div__response" class="main__grid"></div>
+            <div id="div__client" class="main__grid"></div>
+            <div id="div__server" class="main__grid"></div> 
+        </main>
+
+        <aside>
+
+            <div id="text__0">
+                <h2>Code asynchrone</h2>
+                <p>L'interaction entre le <strong>client</strong> et le <strong>serveur</strong> se déroule généralement via le <strong>protocole HTTP</strong> 
+                    (Hypertext Transfer Protocol). Le client envoie une <strong>requête HTTP</strong> au serveur, contenant des informations sur ce qu'il souhaite 
+                    obtenir ou faire. Par exemple, il peut s'agir d'une demande de chargement d'une page Web ou d'envoi de données de formulaire. 
+                    Le serveur, à son tour, traite cette requête et renvoie une <strong>réponse HTTP</strong> contenant les informations demandées ou 
+                    le résultat de la requête. Cet échange de messages permet au client et au serveur d'interagir et d'échanger des <strong>données</strong> 
+                    via le réseau, assurant le fonctionnement de diverses applications Web et services.</p>
+                <p>Pour effectuer des communications, du <strong>code asynchrone</strong> est utilisé. Le code asynchrone en JavaScript est un code 
+                    qui s'exécute indépendamment du flux principal d'exécution du programme. Contrairement au <strong>code synchrone</strong>, 
+                    qui s'exécute séquentiellement, le code asynchrone permet de continuer l'exécution du programme sans attendre la fin de certaines opérations, 
+                    telles que le chargement de données depuis le réseau ou l'exécution de tâches longues.</p>
+            </div>
+
+            <div id="text__1">
+                <h2>Client (Frontend) et Server (Backend)</h2>
+                <p>Dans le contexte du développement web, le client est le <strong>navigateur</strong>. Le client envoie des requêtes au serveur. 
+                    Les requêtes peuvent être diverses. Le client peut demander au serveur de renvoyer des données spécifiques ou de les préparer 
+                    d'une certaine manière avant de les renvoyer. Il peut également demander au serveur de sauvegarder quelque chose qu'il transmettra 
+                    avec la requête elle-même.</p>
+                    <p>Le serveur reçoit les requêtes du client. Son rôle est de stocker les informations du client dans la <strong>base de données</strong>, 
+                        de les traiter et de fournir un <strong>accès</strong> selon certaines règles.</p>
+                <p>Les principales <strong>méthodes</strong> de requêtes incluent <strong>GET</strong> (demande des données au serveur), 
+                    <strong>POST</strong> (envoie de nouvelles données au serveur), <strong>PUT</strong> (met à jour des données existantes sur le serveur), 
+                    <strong>DELETE</strong> (supprime des données sur le serveur), <strong>PATCH</strong> (met à jour partiellement des données sur le serveur), 
+                    <strong>OPTIONS</strong> (demande des informations sur les méthodes prises en charge par le serveur), 
+                    <strong>HEAD</strong> (hemande les en-têtes de réponse sans le corps, similaire à GET). </p>
+            </div>
+
+            <div id="text__2">
+                <h2>Promise</h2>
+                <p>Dès que le client envoie une requête au serveur, il crée automatiquement un <strong>objet Promise.</strong> 
+                    Un Promise est un objet qui peut se trouver dans l'un des trois états suivants : en attente <strong>(Pending)</strong>, 
+                    accompli <strong>(Resolved)</strong> et rejeté <strong>(Rejected)</strong>.</p>
+                    <pre><code>    <span class="keyword">const</span> myPromise = <span class="keyword">new</span> Promise((<span class="function">resolve</span>, <span class="function">reject</span>) => {
+        <span class="keyword">const</span> success = <span class="variable">true</span>;
+
+            <span class="keyword">if</span> (success) {
+                <span class="function">resolve</span>(<span class="string">'Success!'</span>); 
+                <span class="comment">// Le Promise entre en état Resolved</span>
+            } <span class="keyword">else</span> {
+                <span class="function">reject</span>(<span class="string">'Error.'</span>); 
+                <span class="comment">// Le Promise entre en état Rejected</span>
+            }
+        });</code></pre>
+            </div>
+
+            <div id="text__3">
+                <h2>Response</h2>
+                <p>La <strong>réponse</strong> du serveur comprend les informations renvoyées par le serveur en réponse à une requête envoyée par le client. 
+                    Ce réponse contient généralement des données nécessaires à l'exécution de la demande du client, 
+                    ainsi que des informations sur la demande elle-même, telles que le statut de la demande, les en-têtes et autres métadonnées.</p>
+                <p>Voici quelques-uns des principaux composants de la réponse du serveur :</p>
+                <ol>
+                    <li><strong>Status Code :</strong> Il s'agit d'un code numérique qui informe le client de l'état de la demande. 
+                        Par exemple, le code <strong>200</strong> indique une demande réussie, tandis que le code <strong>404</strong> indique 
+                        que la ressource demandée n'a pas été trouvée.</li>
+                    <li><strong>Headers :</strong> Ce sont des métadonnées transmises avec la réponse et contiennent généralement des informations sur le type de contenu, 
+                        l'encodage, la date et d'autres paramètres de la réponse.</li>
+                    <li><strong>Response Body :</strong> Ce sont les données renvoyées par le serveur en réponse à la demande. 
+                        Ces données peuvent être dans différents formats tels que du <strong>texte</strong>, <strong>JSON</strong>, <strong>XML</strong>, etc., 
+                        et contiennent généralement les informations demandées par le client.</li>
+                </ol>
+            </div>
+
+            <div id="text__4">
+                <h2>Parsing</h2>
+                <p>Lorsque le client reçoit une réponse du serveur, plusieurs étapes se produisent :</p>
+                <ol>
+                    <li><strong>Réception des données :</strong> Le client reçoit les données du serveur, qui peuvent inclure du code HTML, 
+                        du JSON, du XML, des images, des fichiers et d'autres ressources, en fonction de la requête qui a été envoyée.</li>
+                    <li><strong>Traitement de la réponse :</strong> Le client traite les données reçues en fonction de leur type et de leur contenu. 
+                        Par exemple, si c'est du JSON, les données peuvent être utilisées pour mettre à jour l'interface utilisateur ou effectuer des actions.</li>
+                    <li><strong>Gestion des erreurs :</strong> Le client vérifie le code d'état de la réponse pour déterminer si la requête a été réussie 
+                        ou s'il y a eu des erreurs. Si le code d'état indique une erreur, le client peut effectuer les actions appropriées.</li>
+                    <li><strong>Mise à jour de l'interface utilisateur :</strong> En fonction du contenu de la réponse, le client peut mettre à jour 
+                        son interface utilisateur, par exemple en affichant les données reçues sur la page Web, en mettant à jour le contenu des éléments,
+                         en masquant ou en affichant certains composants, etc.</li>
+                    <li><strong>Actions supplémentaires :</strong> Après le traitement de la réponse, le client peut effectuer des actions supplémentaires, 
+                        telles que l'envoi de requêtes supplémentaires, la mise à jour de l'état de l'application, l'exécution d'animations ou la redirection 
+                        de l'utilisateur vers une autre page.</li>
+                </ol>
+            </div>
+
+            <div id="text__5">
+                <p>Lorsque la réponse du serveur est reçue, Promise dans l'état <strong>Pending</strong> passe à l'état <strong>Resolved</strong> 
+                    (si <em>response.ok === true</em>) ou <strong>Rejected</strong> (si <em>response.ok === false</em>) en fonction de la réussite ou de l'échec de la requête.</p>
+                    <p>Si la requête est réussie, alors Promise passe à l'état <strong>Resolved</strong> et vous pouvez obtenir les données de la réponse à l'aide de la méthode 
+                        <em>.then()</em>. En cas d'erreur, Promise passe à l'état <strong>Rejected</strong> et vous pouvez traiter l'erreur à l'aide de la méthode 
+                        <em>.catch().</em></p>
+            <pre><code><span class="function">fetch</span>(<span class="string">'url'</span>)<span class="comment"> // Envoi d'une requête</span>
+    .<span class="function">then</span>(<span class="variable">response</span> => {
+        <span class="function">if</span> (<span class="variable">response</span>.<span class="keyword">ok</span>) {
+        <span class="comment">// Conversion de la réponse au format JSON</span>
+        <span class="keyword">return</span> <span class="variable">response</span>.<span class="function">json</span>();
+    } <span class="keyword">else</span> { <span class="comment">// Gestion des erreurs</span>
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'HTTP Error: '</span> + <span class="variable">response</span>.<span class="function">status</span>);
+        }
+    })
+    .<span class="function">then</span>(<span class="variable">data</span> => { <span class="comment">// Utilisation les données de réponse</span>
+    })
+    .<span class="function">catch</span>(<span class="variable">error</span> => {<span class="comment">// Gestion des erreurs</span>
+       <span class="function">console</span>.<span class="function">error</span>(<span class="string">'Erreur de lecture de la réponse:'</span>, <span class="variable">error</span>);
+    });</code></pre>
+            </div>
+
+            <div id="text__6">
+                <p>Lorsque Promise est résolue avec succès, cela signifie que l'opération asynchrone à laquelle Promise était attachée s'est terminée avec succès. 
+                    En cas d'exécution d'une requête HTTP, la résolution réussie de Promise se produit lorsque le serveur renvoie un <strong>code de statut HTTP</strong> 
+                    dans la plage de 200 à 299. Par exemple :</p>
+                    <ul>
+                        <li><strong>200 OK :</strong> Ce code de réponse indique que la requête a été exécutée avec succès et que les données demandées sont renvoyées.</li>
+                        <li><strong>201 Created :</strong> Il indique que la requête a été exécutée avec succès et a abouti à la création d'une nouvelle ressource.</li>
+                        <li><strong>204 No Content :</strong> Ce code indique que la requête a été exécutée avec succès, mais que le serveur ne renvoie aucun contenu en réponse.</li>
+                    </ul>
+                <p>Lorsque Promise est résolue avec succès, le premier gestionnaire <em>.then()</em> est exécuté, et c'est généralement dans ce gestionnaire 
+                    que les données reçues sont traitées ou que des actions ultérieures sont exécutées en fonction du résultat réussi de l'opération.</p>
+                    <pre><code>.<span class="function">then</span>(<span class="variable">response</span> => {<span class="comment">// Géstion une réponse réussie</span>
+    <span class="function">if</span> (<span class="variable">response</span>.<span class="keyword">ok</span>) { <span class="comment">// Conversion de la réponse au format JSON</span>
+        <span class="keyword">return</span> <span class="variable">response</span>.<span class="function">json</span>();
+    } <span class="keyword">else</span> { <span class="comment">// Gestion des erreurs</span>
+        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="function">Error</span>(<span class="string">'HTTP Error: '</span> + <span class="variable">response</span>.<span class="function">status</span>);}
+})</code></pre>
+            </div>
+
+            <div id="text__7">
+                <p>Lorsque Promise est résolue de manière infructueuse, cela signifie qu'une opération asynchrone, à laquelle Promise était liée, 
+                    s'est terminée par une erreur ou un rejet. Par exemple, dans le cas d'une requête HTTP, 
+                    Promise est résolue de manière infructueuse lorsque le serveur renvoie un code d'état HTTP en dehors de la plage 200-299. 
+                    Les codes d'état HTTP les plus courants qui entraînent une résolution infructueuse de Promise sont :</p>
+                <ol>
+                    <li><strong>404 Not Found :</strong> Indique que la ressource demandée n'a pas été trouvée sur le serveur.</li>
+                    <li><strong>401 Unauthorized :</strong> Indique qu'une authentification est nécessaire pour accéder à la ressource demandée, 
+                        mais que le client n'a pas fourni les informations d'identification requises ou qu'elles sont incorrectes.</li>
+                    <li><strong>500 Internal Server Error :</strong> Indique une erreur interne du serveur qui empêche l'exécution de la requête.</li>
+                </ol>
+                <p>Le bloc <em>catch()</em> est exécuté. Ce bloc est utilisé pour gérer les erreurs. 
+                    Il contient du code qui sera exécuté en cas d'échec de l'opération. Ce bloc contient généralement la logique de gestion des erreurs, y compris 
+                    l'affichage de messages d'erreur ou d'autres actions en fonction des besoins de l'application.</p>
+<pre><code>  .<span class="function">catch</span>(<span class="variable">error</span> => {<span class="comment"> // Gestion des erreurs</span>
+    <span class="function">console</span>.<span class="function">error</span>(<span class="string">'Erreur de lecture de la réponse:'</span>, <span class="variable">error</span>);
+  });</code></pre>
+            </div>
+
+        </aside>
+        
+        <footer>
+            <div id="copyright">© Funky Corgi 2023 - 2024</div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,389 @@
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    font-size: 16px;
+}
+
+#container {
+    display: grid;
+    grid-template-rows: 7% auto 7%;
+    grid-template-columns: 50% 50%;
+    grid-template-areas:
+        "header header"
+        "main aside"
+        "footer footer";
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background-color:cornflowerblue;
+    padding: 1em;
+    color: white;
+}
+
+button {
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+#download {
+    float: right;
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+a:hover {
+    color: rgb(60, 81, 120);
+}
+
+main {
+    grid-area: main;
+    background-color: #f1f1f1;
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 40% 50%;
+}
+
+.main__grid{
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+
+aside {
+    grid-area: aside;
+    background-color: #ccc;
+    padding: 2em 4em 0 4em;
+    line-height: 1.5;
+}
+
+footer {
+    grid-area: footer;
+    background-color: cornflowerblue;
+    padding: 1em;
+    color: white;
+    text-align: center;
+}
+
+#client {
+    background-color: gold;
+    color: white;
+    width: 170px;
+    height: 170px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: auto;
+    z-index: 1;
+    place-self: center;
+}
+
+#server {
+    background-color:cornflowerblue;
+    color: white;
+    width: 170px;
+    height: 170px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    margin: auto;
+}
+
+#obj__promise {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin: 110px auto 0;
+    background-color: #ccc;
+}
+
+#obj__promise::after {
+    content: 'Promise';
+    position: absolute;
+    font-size: 1rem;
+    padding: 5px;
+    top: 150px;
+    color: grey;
+}
+
+#obj__response {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    background-color:rgb(60, 81, 120);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    margin: 110px auto 0;
+    opacity: 1;
+}
+
+#obj__response::after {
+    content: 'Response';
+    position: absolute;
+    font-size: 1rem;
+    padding: 5px;
+    top: 150px;
+    color: gray;
+}
+
+.arrow__request {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 10px solid black;
+}
+
+.arrow__request::after {
+    content: 'HTTP-request';
+    position: absolute;
+    font-size: x-small;
+    background-color:gold;
+    padding: 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    top: 5px;
+    left: -95px;
+}
+
+.line__request {
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: black;
+}
+
+.arrow__response {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-right: 10px solid black;
+}
+
+.arrow__response::after {
+    content: 'Response with data';
+    position: absolute;
+    font-size: x-small;
+    background-color:cornflowerblue;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+    vertical-align: middle;
+    top: 5px;
+    left: 20px;
+}
+
+.line__response {
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: black;
+}
+
+.div__message {
+    color: gray;
+    font-size: medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 10px auto;
+    place-self: center;
+}
+
+.resolved {
+    background-color:yellowgreen;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInResolved 1.5s ease-in-out forwards;
+}
+
+.rejected {
+    background-color:coral;
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeInRejected 1.5s ease-in-out forwards;
+}
+
+pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 5px;
+    border-radius: 5px;
+    overflow-x: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding-top: 10px;
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    color: #f8f8f2;
+}
+
+.keyword { color: #66d9ef; }
+.string { color: #a6e22e; }
+.comment { color: #75715e; }
+.function { color: #fd971f; }
+.variable { color: #f8f8f2; }
+
+#logo {
+    position: fixed;
+    bottom: 0;
+    margin-left: 20px;
+}
+
+img {
+    width: 120px;
+}
+
+@keyframes fadeInResolved {
+    0% {
+        background-color: #ccc;
+    }
+    100% {
+        background-color: yellowgreen;
+    }
+}
+
+@keyframes fadeInRejected {
+    0% {
+        background-color: #ccc;
+    }
+    100% {
+        background-color: coral;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+}
+
+@keyframes clientFlicker {
+    0%, 100% {
+        background-color: gold;
+    }
+    50% {
+        background-color: goldenrod;
+    }
+}
+
+@keyframes serverFlicker {
+    0%, 100% {
+        background-color: cornflowerblue;
+    }
+    50% {
+        background-color: rgb(60, 81, 120);
+    }
+}
+
+@keyframes pendingFlicker {
+    0%, 100% {
+        background-color: #b5b3b3;
+    }
+    50% {
+        background-color: #ccc;
+    }
+}
+
+@keyframes parsingFlicker {
+    0%, 100% {
+        color: #ccc;
+    }
+    50% {
+        color: grey;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.fade__in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.fade__out {
+    animation: fadeOut 2s ease-in-out forwards;
+}
+
+.pending {
+    background-color:#ccc;
+    animation: fadeIn 1s ease-in-out, pendingFlicker 1s infinite forwards;
+}
+
+.response__checked {
+    animation: fadeIn 1s ease-in-out;
+}
+
+.client__flicker {
+    animation: clientFlicker 1s linear 0s 3;
+}
+
+.server__flicker {
+    animation: serverFlicker 1s linear 0s 3;
+}
+
+.flicker__text {
+    opacity: 1; 
+    animation: parsingFlicker 1s linear 0s 3 forwards, fadeOut 0.5s ease-in-out 3s forwards;
+}
+
+.text__client {
+    position: absolute;
+}
+
